@@ -1,0 +1,21 @@
+{
+  "name": "cb-predict",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "expo start"
+  },
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "expo": "~51.0.28",
+    "expo-status-bar": "~1.12.1",
+    "react": "^18.2.0",
+    "react-native": "^0.74.5",
+    "react-native-element-dropdown": "^2.12.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2"
+  },
+  "private": true
+}
