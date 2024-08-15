@@ -1,7 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { View, Image, StyleSheet, Pressable } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faRotateRight, faSquare } from "@fortawesome/free-solid-svg-icons";
 import { Display, Label, DateDisplay } from "./components/Text";
 
 const capeGradeDescription = [
@@ -36,25 +38,29 @@ const locations = [
   ["UB", "Ubon Ratchathani"],
 ];
 
-const capeValues = {
-  BK: 251,
-  CM: 1154,
-  KKN: null,
-  NMA: 726,
-  PLK: 1406,
-  PKN: 864,
-  SK: 1429,
-  UB: 756,
-}
-
 export default function App() {
   const [location, setLocation] = useState("CM");
-  const cape = capeValues[location];
+  const [capeValues, setCapeValues] = useState({});
+  const cape = capeValues[location] ?? null;
   const capeGrade = getGrade(cape);
+  const getCapeValues = () => {
+    fetch("http://192.168.1.9:3000/cape")
+      .then((res) => res.json())
+      .then(setCapeValues)
+  }
+  useEffect(() => {
+    getCapeValues();
+  }, []);
   return (
     <View style={styles.root}>
-      <DateDisplay />
-      <View style={{ display: "flex", flexDirection: "row" }}>
+      <View style={{ ...styles.row, gap: 20 }}>
+        <FontAwesomeIcon icon={faSquare} size={24} style={{ opacity: 0 }} />
+        <DateDisplay />
+        <Pressable onPress={getCapeValues}>
+          <FontAwesomeIcon icon={faRotateRight} size={24} />
+        </Pressable>
+      </View>
+      <View style={styles.row}>
         <Label size={16}>Location: </Label>
         <Dropdown
           data={locations}
@@ -62,7 +68,7 @@ export default function App() {
           valueField="0"
           value={location}
           onChange={([id]) => setLocation(id)}
-          style={{ width: "50%" }}
+          style={{ width: 200 }}
         />
       </View>
       <Image src={`https://openweathermap.org/img/wn/${capeGradeIcons[capeGrade]}@4x.png`} style={{ width: 400, height: 200 }} />
@@ -88,7 +94,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    justifyContent: "center",
     gap: 10,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
