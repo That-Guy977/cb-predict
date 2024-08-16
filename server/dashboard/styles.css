@@ -1,0 +1,26 @@
+#root {
+  margin: 0 auto;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-row {
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-self: end;
+}
+
+.action {
+  padding: 0;
+  width: 30px;
+  aspect-ratio: 1;
+  font-size: large;
+}
+
+.cape-value {
+  text-align: right;
+}

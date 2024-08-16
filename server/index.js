@@ -12,8 +12,18 @@ const data = {
 };
 
 const app = express();
+app.use(express.json({ type: "*/*" }));
+app.use("/assets", express.static("./assets"))
+app.use(express.static("./dashboard"))
+
 app.get("/cape", (req, res) => {
   res.json(data);
+});
+app.put("/cape", (req, res) => {
+  for (const id in data) {
+    data[id] = req.body[id];
+  }
+  res.sendStatus(204);
 });
 
 app.listen("3000");
