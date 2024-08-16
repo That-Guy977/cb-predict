@@ -9,9 +9,7 @@
   <body>
     <div id="root">
       <table>
-        <tbody id="cape">
-
-        </tbody>
+        <tbody id="cape"></tbody>
       </table>
       <div class="action-row">
         <button class="action" onclick="refresh()"><i class="fa-solid fa-rotate-right"></i></button>
@@ -39,7 +37,7 @@
         const capeCell = document.createElement("td");
         const capeInput = document.createElement("input");
         capeInput.id = `${id}-value`;
-        capeInput.className = `cape-value`;
+        capeInput.className = "cape-value";
         capeInput.type = "number";
         capeInput.min = 0;
         capeInput.step = 0;
