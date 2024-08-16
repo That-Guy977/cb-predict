@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { View, Image, StyleSheet, Pressable } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faRotateRight, faSquare } from "@fortawesome/free-solid-svg-icons";
 import { Display, Label, DateDisplay } from "./components/Text";
 
@@ -25,6 +25,13 @@ const capeGradeIcons = [
   "02d",
   "03d",
   "04d",
+];
+
+const capeGradeColors = [
+  "#ffffff",
+  "#b6e9e3",
+  "#c0c0c0",
+  "#7e7e7e",
 ];
 
 const locations = [
@@ -52,7 +59,7 @@ export default function App() {
     getCapeValues();
   }, []);
   return (
-    <View style={styles.root}>
+    <View style={{ ...styles.root, backgroundColor: capeGradeColors[capeGrade] }}>
       <View style={{ ...styles.row, gap: 20 }}>
         <FontAwesomeIcon icon={faSquare} size={24} style={{ opacity: 0 }} />
         <DateDisplay />
@@ -66,7 +73,7 @@ export default function App() {
           selectedValue={location}
           onValueChange={(id) => setLocation(id)}
           mode="dropdown"
-          style={{ width: 250, backgroundColor: "red" }}
+          style={{ width: 250 }}
         >
           {locations.map(([id, label]) => <Picker.Item label={label} value={id} key={id} />)}
         </Picker>
