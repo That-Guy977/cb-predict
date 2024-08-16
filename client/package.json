@@ -10,13 +10,14 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-native-fontawesome": "^0.3.2",
-    "@react-native-picker/picker": "^2.7.7",
+    "@react-native-picker/picker": "^2.7.5",
     "date-fns": "^3.6.0",
     "expo": "~51.0.28",
+    "expo-notifications": "~0.28.15",
     "expo-status-bar": "~1.12.1",
     "react": "^18.2.0",
     "react-native": "^0.74.5",
-    "react-native-svg": "^15.5.0"
+    "react-native-svg": "^15.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2"

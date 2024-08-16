@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { View, Image, StyleSheet, Pressable } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import * as Notifications from "expo-notifications";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faRotateRight, faSquare } from "@fortawesome/free-solid-svg-icons";
 import { Display, Label, DateDisplay } from "./components/Text";
@@ -45,15 +46,32 @@ const locations = [
   ["UB", "Ubon Ratchathani"],
 ];
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    };
+  },
+});
+
 export default function App() {
   const [location, setLocation] = useState("CM");
   const [capeValues, setCapeValues] = useState({});
   const cape = capeValues[location] ?? null;
   const capeGrade = getGrade(cape);
-  const getCapeValues = () => {
-    fetch("http://192.168.1.9:3000/cape")
-      .then((res) => res.json())
-      .then(setCapeValues)
+  const getCapeValues = async () => {
+    const data = await fetch("http://192.168.1.9:3000/cape").then((res) => res.json())
+    setCapeValues(data);
+    if (getGrade(data[location]) == 3) {
+      Notifications.scheduleNotificationAsync({
+        content: {
+          title: `High CAPE Index reported in ${locations.find(([id]) => id === location)[1]}`,
+        },
+        trigger: null
+      });
+    }
   }
   useEffect(() => {
     getCapeValues();
