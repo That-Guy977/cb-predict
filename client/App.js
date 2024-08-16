@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { View, Image, StyleSheet, Pressable } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
+import { Picker } from "@react-native-picker/picker";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faRotateRight, faSquare } from "@fortawesome/free-solid-svg-icons";
 import { Display, Label, DateDisplay } from "./components/Text";
@@ -62,14 +62,14 @@ export default function App() {
       </View>
       <View style={styles.row}>
         <Label size={16}>Location: </Label>
-        <Dropdown
-          data={locations}
-          labelField="1"
-          valueField="0"
-          value={location}
-          onChange={([id]) => setLocation(id)}
-          style={{ width: 200 }}
-        />
+        <Picker
+          selectedValue={location}
+          onValueChange={(id) => setLocation(id)}
+          mode="dropdown"
+          style={{ width: 250, backgroundColor: "red" }}
+        >
+          {locations.map(([id, label]) => <Picker.Item label={label} value={id} key={id} />)}
+        </Picker>
       </View>
       <Image src={`https://openweathermap.org/img/wn/${capeGradeIcons[capeGrade]}@4x.png`} style={{ width: 400, height: 200 }} />
       <Label size={16}>CAPE Index (J/kg)</Label>
