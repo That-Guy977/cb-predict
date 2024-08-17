@@ -26,6 +26,7 @@ npm start
 ```
 - Android: ใช้แอป Expo Go สแกน QR
 - iOS: ใช้แอปกล้องสแกน QR จะไปเปิดในแอป Expo Go
+
 ก๊อป IP ที่ให้ (`Metro waiting on exp://x.x.x.x:8081`) ไปใส่ [`getCapeValues`](./client/App.js) (`fetch("http://x.x.x.x:3000/cape")`)
 
 ### เซอร์เวอร์
