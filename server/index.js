@@ -1,5 +1,7 @@
 import express from "express";
 
+const port = 3000;
+
 const data = {
   BK: 251,
   CM: 1154,
@@ -26,4 +28,4 @@ app.put("/cape", (req, res) => {
   res.sendStatus(204);
 });
 
-app.listen("3000");
+app.listen(port, () => console.log("App listening on port 3000"));
